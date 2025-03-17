@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>موقع التشفير</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            direction: rtl;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        h2 { color: #333; }
+        input, button {
+            width: 80%;
+            padding: 10px;
+            margin: 10px;
+            font-size: 16px;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>إعداد: أحمد علي</h2>
+
+    <h3>التشفير</h3>
+    <input type="text" id="inputText" placeholder="أدخل النص">
+    <button onclick="encrypt()">تشفير</button>
+    <input type="text" id="encryptedText" readonly>
+    <button onclick="copyText()">نسخ</button>
+
+    <h3>فك التشفير</h3>
+    <input type="text" id="decryptionInput" placeholder="أدخل الأرقام المشفرة">
+    <button onclick="decrypt()">فك التشفير</button>
+    <input type="text" id="decryptedText" readonly>
+
+    <script>
+        function encrypt() {
+            let text = document.getElementById("inputText").value;
+            let encrypted = text.split('').map(char => char.charCodeAt(0)).join('-');
+            document.getElementById("encryptedText").value = encrypted;
+        }
+
+        function decrypt() {
+            let encryptedText = document.getElementById("decryptionInput").value;
+            let decrypted = encryptedText.split('-').map(num => String.fromCharCode(num)).join('');
+            document.getElementById("decryptedText").value = decrypted;
+        }
+
+        function copyText() {
+            let copyText = document.getElementById("encryptedText");
+            copyText.select();
+            document.execCommand("copy");
+            alert("تم النسخ!");
+        }
+    </script>
+
+</body>
+</html>
